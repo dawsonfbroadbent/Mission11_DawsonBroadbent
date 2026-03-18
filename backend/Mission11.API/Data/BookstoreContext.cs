@@ -7,8 +7,7 @@ namespace Mission11.API.Data;
 
 public partial class BookstoreContext : DbContext
 {
-    public BookstoreContext(DbContextOptions<BookstoreContext> options)
-        : base(options)
+    public BookstoreContext(DbContextOptions<BookstoreContext> options) : base(options)
     {
     }
 

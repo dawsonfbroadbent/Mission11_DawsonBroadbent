@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Mission11.API.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddCors();
+
+builder.Services.AddDbContext<BookstoreContext>(options => 
+    options.UseSqlite(builder.Configuration.GetConnectionString("WaterConnection")));
 
 var app = builder.Build();
 
@@ -13,6 +20,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors(x => x.WithOrigins("http://localhost:3000"));
 
 app.UseHttpsRedirection();
 
