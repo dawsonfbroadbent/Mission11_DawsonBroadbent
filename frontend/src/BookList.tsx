@@ -38,50 +38,88 @@ function BookList() {
   };
 
   return (
-    <section>
-      <h1>Bookstore Catalog</h1>
+    <section className="container py-4 py-lg-5">
+      <div className="card border-0 shadow-sm">
+        <div className="card-body p-0">
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 px-4 py-4 border-bottom bg-light">
+            <div>
+              <h2 className="h4 mb-1 text-dark">Bookstore Catalog</h2>
+              <p className="mb-0 text-secondary">
+                Browse the available titles in a clean, easy-to-read table layout.
+              </p>
+            </div>
+            <span className="badge rounded-pill text-bg-primary fs-6 fw-semibold px-3 py-2">
+              {totalBooks} Books
+            </span>
+          </div>
 
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Publisher</th>
-              <th>ISBN</th>
-              <th>Classification</th>
-              <th>Category</th>
-              <th>Page Count</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book) => (
-              <tr key={book.bookId}>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.publisher}</td>
-                <td>{book.isbn}</td>
-                <td>{book.classification}</td>
-                <td>{book.category}</td>
-                <td>{book.pageCount}</td>
-                <td>${book.price.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <div className="table-responsive">
+            <table className="table table-hover align-middle mb-0">
+              <thead className="table-light">
+                <tr>
+                  <th className="px-4 py-3 text-uppercase small text-secondary">
+                    Title
+                  </th>
+                  <th className="py-3 text-uppercase small text-secondary">
+                    Author
+                  </th>
+                  <th className="py-3 text-uppercase small text-secondary">
+                    Publisher
+                  </th>
+                  <th className="py-3 text-uppercase small text-secondary">
+                    ISBN
+                  </th>
+                  <th className="py-3 text-uppercase small text-secondary">
+                    Classification
+                  </th>
+                  <th className="py-3 text-uppercase small text-secondary">
+                    Category
+                  </th>
+                  <th className="py-3 text-uppercase small text-secondary">
+                    Page Count
+                  </th>
+                  <th className="pe-4 py-3 text-uppercase small text-secondary">
+                    Price
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {books.map((book) => (
+                  <tr key={book.bookId}>
+                    <td className="px-4 py-3 fw-semibold text-dark">
+                      {book.title}
+                    </td>
+                    <td className="py-3">{book.author}</td>
+                    <td className="py-3">{book.publisher}</td>
+                    <td className="py-3 text-nowrap">{book.isbn}</td>
+                    <td className="py-3">{book.classification}</td>
+                    <td className="py-3">{book.category}</td>
+                    <td className="py-3">{book.pageCount}</td>
+                    <td className="pe-4 py-3 fw-semibold text-dark">
+                      ${book.price.toFixed(2)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="card-footer bg-white border-top px-4 py-3">
+          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <PageSizeSelector
+              pageSize={pageSize}
+              onPageSizeChange={handlePageSizeChange}
+            />
+
+            <Pagination
+              pageNum={pageNum}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        </div>
       </div>
-
-      <Pagination
-        pageNum={pageNum}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
-
-      <PageSizeSelector
-        pageSize={pageSize}
-        onPageSizeChange={handlePageSizeChange}
-      />
     </section>
   );
 }
