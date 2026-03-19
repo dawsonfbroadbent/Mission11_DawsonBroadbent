@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mission11.API.Models;
+namespace Mission11.API.Data;
 
 public partial class Book
 {

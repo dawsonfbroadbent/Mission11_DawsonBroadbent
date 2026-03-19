@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Mission11.API.Models;
+using Mission11.API.Data;
 
 namespace Mission11.API.Data;
 

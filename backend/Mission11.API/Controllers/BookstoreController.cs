@@ -11,20 +11,20 @@ public class BookstoreController : ControllerBase
     private BookstoreContext _bookstoreContext;
     public BookstoreController(BookstoreContext tempContext) => _bookstoreContext = tempContext;
 
-    [HttpGet("AllProjects")]
+    [HttpGet("AllBooks")]
     public IActionResult Get(int pageSize = 10, int pageNum =1)
     {
-        var projects = _bookstoreContext.Books
+        var books = _bookstoreContext.Books
             .Skip((pageNum -1) *  pageSize)
             .Take(pageSize)
             .ToList();
         
-        var totalNumProjects = _bookstoreContext.Books.Count();
+        var totalNumBooks = _bookstoreContext.Books.Count();
 
         var returnedObject = new
         {
-            Projects = projects,
-            TotalNumProjects = totalNumProjects
+            Books = books,
+            TotalNumBooks = totalNumBooks
         };
         
         return Ok(returnedObject);

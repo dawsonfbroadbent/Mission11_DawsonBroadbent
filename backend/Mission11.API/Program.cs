@@ -11,7 +11,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddCors();
 
 builder.Services.AddDbContext<BookstoreContext>(options => 
-    options.UseSqlite(builder.Configuration.GetConnectionString("WaterConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("BookstoreConnection")));
 
 var app = builder.Build();
 
