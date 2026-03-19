@@ -12,9 +12,15 @@ public class BookstoreController : ControllerBase
     public BookstoreController(BookstoreContext tempContext) => _bookstoreContext = tempContext;
 
     [HttpGet("AllBooks")]
-    public IActionResult Get(int pageSize = 10, int pageNum =1)
+    public IActionResult Get(int pageSize = 10, int pageNum = 1, string sortOrder = "asc")
     {
-        var books = _bookstoreContext.Books
+        var booksQuery = _bookstoreContext.Books.AsQueryable();
+
+        booksQuery = string.Equals(sortOrder, "desc", StringComparison.OrdinalIgnoreCase)
+            ? booksQuery.OrderByDescending(b => b.Title)
+            : booksQuery.OrderBy(b => b.Title);
+
+        var books = booksQuery
             .Skip((pageNum -1) *  pageSize)
             .Take(pageSize)
             .ToList();

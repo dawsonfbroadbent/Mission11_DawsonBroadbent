@@ -5,15 +5,16 @@ import PageSizeSelector from './PageSizeSelector';
 
 function BookList() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalBooks, setTotalBooks] = useState<number>(0);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
-          `https://localhost:5000/api/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}`
+          `https://localhost:5000/api/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}&sortOrder=${sortOrder}`
         );
         const data = await response.json();
         setBooks(data.books);
@@ -24,7 +25,7 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageSize, pageNum]);
+  }, [pageSize, pageNum, sortOrder]);
 
   const totalPages = Math.ceil(totalBooks / pageSize);
 
@@ -34,6 +35,11 @@ function BookList() {
 
   const handlePageSizeChange = (size: number) => {
     setPageSize(size);
+    setPageNum(1);
+  };
+
+  const handleSortChange = (order: 'asc' | 'desc') => {
+    setSortOrder(order);
     setPageNum(1);
   };
 
@@ -48,9 +54,30 @@ function BookList() {
                 Browse the available titles in a clean, easy-to-read table layout.
               </p>
             </div>
-            <span className="badge rounded-pill text-bg-primary fs-6 fw-semibold px-3 py-2">
-              {totalBooks} Books
-            </span>
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <span className="badge rounded-pill text-bg-primary fs-6 fw-semibold px-3 py-2">
+                {totalBooks} Books
+              </span>
+              <div className="d-flex align-items-center gap-2">
+                <label
+                  htmlFor="sort-order"
+                  className="form-label mb-0 fw-semibold text-secondary"
+                >
+                  Sort
+                </label>
+                <select
+                  id="sort-order"
+                  className="form-select form-select-sm w-auto"
+                  value={sortOrder}
+                  onChange={(e) =>
+                    handleSortChange(e.target.value as 'asc' | 'desc')
+                  }
+                >
+                  <option value="asc">Title: A-Z</option>
+                  <option value="desc">Title: Z-A</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div className="table-responsive">
