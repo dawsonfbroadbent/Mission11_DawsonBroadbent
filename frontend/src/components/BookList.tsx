@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Book } from './types/book';
+import type { Book } from '../types/book';
 import Pagination from './Pagination';
 import PageSizeSelector from './PageSizeSelector';
 

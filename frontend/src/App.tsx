@@ -1,15 +1,15 @@
-import Heading from './Heading';
-import BookList from './BookList';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BookList from './components/BookList';
+
 
 
 function App() {
   return (
-    <div className="bg-body-tertiary min-vh-100">
-      <Heading />
-      <main className="pb-5">
-        <BookList />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<BookList />} />
+      </Routes>
+    </Router>
   )
 }
 
