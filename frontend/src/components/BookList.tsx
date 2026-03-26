@@ -7,6 +7,8 @@ import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/BookList.css';
 
+// Displays a paginated, sortable table of books with add-to-cart controls.
+// Accepts selectedCategories to filter the results from the API.
 function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
@@ -18,10 +20,12 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
+  // Reset to page 1 whenever the category filters change
   useEffect(() => {
     setPageNum(1);
   }, [selectedCategories]);
 
+  // Fetch books from the API whenever pagination, sort, or filters change
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -46,6 +50,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
     fetchBooks();
   }, [pageSize, pageNum, sortOrder, selectedCategories]);
 
+  // Adjusts the local quantity selector for a given book (before adding to cart)
   const updateQuantity = (bookId: number, change: number) => {
     setQuantities((prev) => {
       const current = prev[bookId] ?? 0;
@@ -58,6 +63,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
     });
   };
 
+  // Builds a CartItem from the selected book and quantity, then navigates to the cart
   const handleAddToCart = (book: Book) => {
     const quantity = quantities[book.bookId] ?? 0;
 

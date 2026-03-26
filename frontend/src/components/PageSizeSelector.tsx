@@ -3,6 +3,7 @@ type PageSizeSelectorProps = {
   onPageSizeChange: (size: number) => void;
 };
 
+// Dropdown that lets the user choose how many results to display per page
 function PageSizeSelector({
   pageSize,
   onPageSizeChange,

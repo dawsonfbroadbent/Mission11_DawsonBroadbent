@@ -8,6 +8,8 @@ interface CartPageState {
   toastMessage?: string;
 }
 
+// Displays the shopping cart with line items, subtotals, and a total.
+// Shows a Bootstrap Toast notification when an item was just added.
 function CartPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,6 +17,7 @@ function CartPage() {
   const [toastMessage, setToastMessage] = useState('');
   const toastRef = useRef<HTMLDivElement>(null);
 
+  // Extract and clear the toast message passed via navigation state
   useEffect(() => {
     const message = (location.state as CartPageState | null)?.toastMessage;
 
@@ -24,6 +27,7 @@ function CartPage() {
     navigate(location.pathname, { replace: true, state: null });
   }, [location.pathname, location.state, navigate]);
 
+  // Show the Bootstrap Toast whenever a new toast message is set
   useEffect(() => {
     if (!toastMessage || !toastRef.current) return;
 

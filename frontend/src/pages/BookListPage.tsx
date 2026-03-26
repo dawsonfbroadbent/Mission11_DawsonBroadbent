@@ -6,6 +6,8 @@ import BookFilter from '../components/BookCategoryFilter';
 import CartSummary from '../components/CartSummary';
 import '../styles/BookListPage.css';
 
+// Main page layout: cart summary, heading, category filter sidebar, and book list.
+// Uses Bootstrap Grid and Offcanvas for responsive filter panel on mobile.
 function BookListPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const offcanvasRef = useRef<HTMLDivElement>(null);

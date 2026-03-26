@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../styles/BookCategoryFilter.css';
 
+// Fetches available book categories from the API and renders checkbox filters.
+// Selected categories are managed by the parent and passed in as props.
 function BookCategoryFilter({
     selectedCategories,
     setSelectedCategories,
@@ -13,7 +15,6 @@ function BookCategoryFilter({
                 try {
                     const response = await fetch('https://localhost:5000/api/Bookstore/GetBookCategories');
                     const data = await response.json();
-                    console.log('Fetched categories:', data);
                     setCategories(data);
                 } catch (error) {
                     console.error('Error fetching categories:', error);

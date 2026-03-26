@@ -4,6 +4,7 @@ type PaginationProps = {
   onPageChange: (page: number) => void;
 };
 
+// Renders page navigation buttons (Previous, numbered pages, Next)
 function Pagination({ pageNum, totalPages, onPageChange }: PaginationProps) {
   return (
     <nav aria-label="Book list pagination">
