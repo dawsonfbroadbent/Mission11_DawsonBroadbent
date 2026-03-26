@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BookList from './components/BookList';
+import BookListPage from './pages/BookListPage';
 
 
 
@@ -7,7 +7,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<BookList />} />
+        <Route path="/" element={<BookListPage/>} />
+        <Route path="/books" element={<BookListPage/>} />
       </Routes>
     </Router>
   )

@@ -3,7 +3,7 @@ import type { Book } from '../types/book';
 import Pagination from './Pagination';
 import PageSizeSelector from './PageSizeSelector';
 
-function BookList() {
+function BookList({selectedCategories}: {selectedCategories: string[]}) {
   const [books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
@@ -13,8 +13,10 @@ function BookList() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
+        const categoryParams = selectedCategories.map((c) => `categories=${encodeURIComponent(c)}`).join('&');
+
         const response = await fetch(
-          `https://localhost:5000/api/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}&sortOrder=${sortOrder}`
+          `https://localhost:5000/api/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}&sortOrder=${sortOrder}${selectedCategories.length ? `&${categoryParams}` : ''}`
         );
         const data = await response.json();
         setBooks(data.books);
@@ -25,7 +27,7 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageSize, pageNum, sortOrder]);
+  }, [pageSize, pageNum, sortOrder, selectedCategories]);
 
   const totalPages = Math.ceil(totalBooks / pageSize);
 
