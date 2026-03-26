@@ -19,6 +19,10 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setPageNum(1);
+  }, [selectedCategories]);
+
+  useEffect(() => {
     const fetchBooks = async () => {
       try {
         const categoryParams = selectedCategories
