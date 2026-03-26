@@ -1,10 +1,39 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Toast } from 'bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import '../styles/CartPage.css';
 
+interface CartPageState {
+  toastMessage?: string;
+}
+
 function CartPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { cart, removeFromCart } = useCart();
+  const [toastMessage, setToastMessage] = useState('');
+  const toastRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const message = (location.state as CartPageState | null)?.toastMessage;
+
+    if (!message) return;
+
+    setToastMessage(message);
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location.pathname, location.state, navigate]);
+
+  useEffect(() => {
+    if (!toastMessage || !toastRef.current) return;
+
+    const toast = Toast.getOrCreateInstance(toastRef.current, {
+      autohide: true,
+      delay: 2500,
+    });
+
+    toast.show();
+  }, [toastMessage]);
 
   const totalAmount = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -13,6 +42,30 @@ function CartPage() {
 
   return (
     <div className='cart-page'>
+      {toastMessage && (
+        <div
+          className='toast-container position-fixed top-0 end-0 p-3'
+          aria-live='polite'
+          aria-atomic='true'
+        >
+          <div
+            ref={toastRef}
+            className='toast text-bg-success border-0'
+            role='status'
+          >
+            <div className='d-flex align-items-center'>
+              <div className='toast-body'>{toastMessage}</div>
+              <button
+                type='button'
+                className='btn-close btn-close-white me-2 m-auto'
+                data-bs-dismiss='toast'
+                aria-label='Close'
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       <header className='bg-primary border-bottom shadow-sm'>
         <div className='container py-4 text-white'>
           <p className='mb-1 text-uppercase fw-semibold small text-white-50'>

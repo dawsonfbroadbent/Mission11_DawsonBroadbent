@@ -4,8 +4,14 @@
   min-height: 100vh;
 }
 
-.book-list-page .filter-sidebar {
-  position: sticky;
-  top: 1rem;
-  align-self: flex-start;
+.book-list-page .filter-offcanvas {
+  --bs-offcanvas-width: min(320px, 85vw);
+}
+
+@media (min-width: 992px) {
+  .book-list-page .filter-sidebar {
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
+  }
 }

@@ -71,7 +71,11 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
     };
 
     addToCart(newItem);
-    navigate('/cart');
+    navigate('/cart', {
+      state: {
+        toastMessage: `${quantity} ${quantity > 1 ? 'copies' : 'copy'} of "${book.title}" added to cart.`,
+      },
+    });
   };
 
   const totalPages = Math.ceil(totalBooks / pageSize);
