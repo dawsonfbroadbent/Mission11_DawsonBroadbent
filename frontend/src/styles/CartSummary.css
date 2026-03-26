@@ -1,0 +1,24 @@
+/* ===== Floating Cart Summary Widget ===== */
+
+.cart-summary {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  z-index: 1050;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cart-summary:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}

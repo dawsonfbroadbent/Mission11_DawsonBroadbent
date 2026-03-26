@@ -1,0 +1,16 @@
+/* ===== Cart Page ===== */
+
+.cart-page {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.cart-page .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-page .cart-item-info {
+  flex: 1;
+}

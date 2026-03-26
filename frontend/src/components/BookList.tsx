@@ -5,6 +5,7 @@ import Pagination from './Pagination';
 import PageSizeSelector from './PageSizeSelector';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import '../styles/BookList.css';
 
 function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]);
@@ -86,7 +87,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   };
 
   return (
-    <section className='container py-4 py-lg-5'>
+    <section className='book-list-section'>
       <div className='card border-0 shadow-sm'>
         <div className='card-body p-0'>
           <div className='d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 px-4 py-4 border-bottom bg-light'>
@@ -189,8 +190,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
                         </button>
 
                         <span
-                          className='fw-semibold'
-                          style={{ minWidth: '24px', textAlign: 'center' }}
+                          className='fw-semibold quantity-display'
                         >
                           {quantities[book.bookId] ?? 0}
                         </span>

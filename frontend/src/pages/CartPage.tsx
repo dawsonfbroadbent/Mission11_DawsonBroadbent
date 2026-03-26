@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import '../styles/CartPage.css';
 
 function CartPage() {
   const navigate = useNavigate();
@@ -11,33 +12,77 @@ function CartPage() {
   );
 
   return (
-    <div className='container'>
-      <h2>Cart</h2>
-      <div>
-        {cart.length === 0 ? (
-          <p>Your cart is empty</p>
-        ) : (
-          <ul>
-            {cart.map((item) => {
-              const subtotal = item.price * item.quantity;
+    <div className='cart-page'>
+      <header className='bg-primary border-bottom shadow-sm'>
+        <div className='container py-4 text-white'>
+          <p className='mb-1 text-uppercase fw-semibold small text-white-50'>
+            Your Shopping
+          </p>
+          <h1 className='mb-0 display-6 fw-semibold'>Cart</h1>
+        </div>
+      </header>
 
-              return (
-                <li key={item.bookId}>
-                  {item.title}: ${subtotal.toFixed(2)} ({item.quantity} @ $
-                  {item.price.toFixed(2)} each)
-                  <button onClick={() => removeFromCart(item.bookId)}>
-                    Remove Book
+      <div className='container py-4'>
+        <div className='row g-4'>
+          <div className='col-lg-8'>
+            <div className='card border-0 shadow-sm'>
+              <div className='card-body p-0'>
+                {cart.length === 0 ? (
+                  <div className='text-center py-5'>
+                    <p className='text-secondary mb-0 fs-5'>Your cart is empty</p>
+                  </div>
+                ) : (
+                  <ul className='list-group list-group-flush'>
+                    {cart.map((item) => {
+                      const subtotal = item.price * item.quantity;
+
+                      return (
+                        <li key={item.bookId} className='list-group-item px-4 py-3'>
+                          <div className='cart-item'>
+                            <div className='cart-item-info'>
+                              <h6 className='mb-1 fw-semibold'>{item.title}</h6>
+                              <small className='text-secondary'>
+                                {item.quantity} x ${item.price.toFixed(2)}
+                              </small>
+                            </div>
+                            <div className='d-flex align-items-center gap-3'>
+                              <span className='fw-semibold'>${subtotal.toFixed(2)}</span>
+                              <button
+                                className='btn btn-sm btn-outline-danger'
+                                onClick={() => removeFromCart(item.bookId)}
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className='col-lg-4'>
+            <div className='card border-0 shadow-sm'>
+              <div className='card-body'>
+                <h5 className='card-title fw-semibold mb-3'>Order Summary</h5>
+                <hr />
+                <div className='d-flex justify-content-between align-items-center mb-4'>
+                  <span className='text-secondary'>Total</span>
+                  <span className='fs-4 fw-bold'>${totalAmount.toFixed(2)}</span>
+                </div>
+                <div className='d-grid gap-2'>
+                  <button className='btn btn-outline-secondary' onClick={() => navigate(-1)}>
+                    Continue Browsing
                   </button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <h3>Total: ${totalAmount.toFixed(2)}</h3>
-      <button>Checkout</button>
-      <button onClick={() => navigate(-1)}>Continue Browsing</button>
     </div>
   );
 }

@@ -1,0 +1,6 @@
+/* ===== Book List Table ===== */
+
+.book-list-section .quantity-display {
+  min-width: 24px;
+  text-align: center;
+}

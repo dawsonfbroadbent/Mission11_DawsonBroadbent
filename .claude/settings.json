@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/dawsonb/Documents/School/IS\\\\ 413\\\\ -\\\\ Hilton/Mission11/frontend/**)",
+      "Read(//Users/dawsonb/Documents/School/IS\\\\ 413\\\\ -\\\\ Hilton/Mission11/frontend/src/**)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}

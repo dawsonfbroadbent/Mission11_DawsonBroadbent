@@ -1,0 +1,11 @@
+/* ===== Book List Page Layout ===== */
+
+.book-list-page {
+  min-height: 100vh;
+}
+
+.book-list-page .filter-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+}
