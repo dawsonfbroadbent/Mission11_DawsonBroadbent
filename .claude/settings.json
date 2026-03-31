@@ -3,7 +3,9 @@
     "allow": [
       "Read(//Users/dawsonb/Documents/School/IS\\\\ 413\\\\ -\\\\ Hilton/Mission11/frontend/**)",
       "Read(//Users/dawsonb/Documents/School/IS\\\\ 413\\\\ -\\\\ Hilton/Mission11/frontend/src/**)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Read(//Users/dawsonb/Documents/School/**)",
+      "Bash(find /Users/dawsonb/Documents/School/IS 413 - Hilton/Mission11/frontend/src -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.json \\\\\\))"
     ]
   }
 }

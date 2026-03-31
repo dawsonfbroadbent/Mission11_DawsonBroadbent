@@ -20,7 +20,7 @@ function AdminBookList() {
   const [totalBooks, setTotalBooks] = useState<number>(0);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [showAddForm, setShowAddForm] = useState<boolean>(false);
-  const [editingProject, setEditingProject] = useState<Book | null>(null);
+  const [editingBook, setEditingBook] = useState<Book | null>(null);
 
   const offcanvasRef = useRef<HTMLDivElement>(null);
 
@@ -202,15 +202,15 @@ function AdminBookList() {
                     </div>
                   )}
 
-                  {editingProject && (
+                  {editingBook && (
                     <div className='p-4 border-bottom'>
                       <EditBookForm
-                        book={editingProject}
+                        book={editingBook}
                         onBookUpdated={() => {
-                          setEditingProject(null);
+                          setEditingBook(null);
                           reloadBooks();
                         }}
-                        onCancel={() => setEditingProject(null)}
+                        onCancel={() => setEditingBook(null)}
                       />
                     </div>
                   )}
@@ -246,7 +246,7 @@ function AdminBookList() {
                               <button
                                 type='button'
                                 className='btn btn-primary btn-sm me-2'
-                                onClick={() => setEditingProject(book)}
+                                onClick={() => setEditingBook(book)}
                               >
                                 Edit
                               </button>
