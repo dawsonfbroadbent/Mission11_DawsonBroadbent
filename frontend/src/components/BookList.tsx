@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Book } from '../types/book';
 import type { CartItem } from '../types/cartItem';
+import { fetchBooks } from '../api/BooksAPI';
 import Pagination from './Pagination';
 import PageSizeSelector from './PageSizeSelector';
 import { useCart } from '../context/CartContext';
@@ -27,19 +28,9 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
 
   // Fetch books from the API whenever pagination, sort, or filters change
   useEffect(() => {
-    const fetchBooks = async () => {
+    const loadBooks = async () => {
       try {
-        const categoryParams = selectedCategories
-          .map((c) => `categories=${encodeURIComponent(c)}`)
-          .join('&');
-
-        const response = await fetch(
-          `https://localhost:5000/api/Bookstore/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}&sortOrder=${sortOrder}${
-            selectedCategories.length ? `&${categoryParams}` : ''
-          }`
-        );
-
-        const data = await response.json();
+        const data = await fetchBooks(pageSize, pageNum, sortOrder, selectedCategories);
         setBooks(data.books);
         setTotalBooks(data.totalNumBooks);
       } catch (error) {
@@ -47,7 +38,7 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
       }
     };
 
-    fetchBooks();
+    loadBooks();
   }, [pageSize, pageNum, sortOrder, selectedCategories]);
 
   // Adjusts the local quantity selector for a given book (before adding to cart)
