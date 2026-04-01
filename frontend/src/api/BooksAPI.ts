@@ -74,6 +74,21 @@ export const updateBook = async (bookId: number, updatedBook: Book): Promise<Boo
     }
 };
 
+export const fetchCategories = async (): Promise<string[]> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/GetBookCategories`);
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch categories');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        throw error;
+    }
+};
+
 export const deleteBook = async (bookId: number): Promise<void> => {
     try {
         const response = await fetch(`${API_BASE_URL}/DeleteBook/${bookId}`, {
